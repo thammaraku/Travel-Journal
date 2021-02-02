@@ -90,7 +90,7 @@ module.exports = function(sequelize, DataTypes) {
   //   });
   // };
 
-  //Many to Many realationship between user and location
+  //Many to Many relationship between user and location
   User.associate = (models) => {
   User.belongsToMany(models.location, {
     through: "merge",

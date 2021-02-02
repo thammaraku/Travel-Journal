@@ -67,7 +67,6 @@ function initMap() {
 
 // POST Request to Location Table
 function postLocation(geoLocationObj) {
-  console.log("postLocations = " + geoLocationObj);
   console.log("postLocations.place = " + geoLocationObj.place);
   console.log("postLocations.lat = " + geoLocationObj.lat);
   console.log("postLocations.lang = " + geoLocationObj.lang);
@@ -81,8 +80,11 @@ function postLocation(geoLocationObj) {
     latitude: latitude,
     longitude: longitude
   })
-    .then(function (data) {
+    .then(() => {
       // window.location.replace("/user_journal");
+    })
+    .catch(err => {
+      console.log(err);
     });
 }
 
@@ -129,13 +131,13 @@ function getGeolocation(placeName) {
 
 
 function collectUserSearch(geoLocationObj) {
-  console.log("collectUserSearc geoLocationObj = " + geoLocationObj);
+  // console.log("collectUserSearch geoLocationObj = " + geoLocationObj);
   userListArr.push(geoLocationObj);
 
   // Render new userListArr
   // renderJournal(userListArr);
   initMap(userListArr);
-  console.log("under collectUserSearch before postLocation geoLocationObj = " + geoLocationObj);
+  // console.log("under collectUserSearch before postLocation geoLocationObj = " + geoLocationObj);
   postLocation(geoLocationObj);
 
 }
@@ -149,9 +151,6 @@ function renderJournal() {
       <button class="" style="float:right"><i class="fas fa-camera"></i></button></p>
       <p class="">${userListArr[i].journal}</p>
       </td>`);
-
-      // $(`#journal_row${i}`).html(`<td><p class="">${userListArr[i].place}</p></td>`);
-
     }
   }
 }
@@ -161,11 +160,11 @@ function renderJournal() {
 // To have a landing map when array is first empty
 function landingMap() {
 
-  let newAddArr = [];
-  const userListArr = [];
+  // let newAddArr = [];
+  // const userListArr = [];
   // const newAdd = {};
-  const geoLocationObj = {};
-  console.log("newAddArr.length under landingMap = " + newAddArr.length);
+  // const geoLocationObj = {};
+  // console.log("newAddArr.length under landingMap = " + newAddArr.length);
 
 
   const map = new google.maps.Map(document.getElementById("map"), {
@@ -181,7 +180,7 @@ function handleSearchBtnSubmit(event) {
   event.preventDefault;
 
 
-  console.log("under handleSearchBtnSubmit memberEmail = " + memberEmail);
+  // console.log("under handleSearchBtnSubmit memberEmail = " + memberEmail);
   // console.log("newAddArr.length under Search Button = " + newAddArr.length);
 
   var newAdd = {
@@ -210,6 +209,7 @@ function renderJournal2(newAddArr) {
   console.log("newAddArr.length under renderJournal2 = " + newAddArr.length);
 
   for (var i = 0; i < newAddArr.length; ++i) {
+    console.log("newAddArr[i].userEmail = " + newAddArr[i].userEmail);
     console.log("newAddArr[i].placeName = " + newAddArr[i].placeName);
     console.log("newAddArr[i].date = " + newAddArr[i].date);
     console.log("newAddArr[i].journal = " + newAddArr[i].journal);
@@ -239,8 +239,11 @@ function postJournal(newAdd) {
     start_date: date,
     journalEntry: journal
   })
-    .then(function (data) {
+    .then(() => {
       // window.location.replace("/user_journal");
+    })
+    .catch(err => {
+      console.log(err);
     });
 }
 
@@ -253,7 +256,7 @@ function handlePushBtnSubmit(event) {
   $("#journal-body").val("");
   $("#tripName").val("");
   $(".journal_table").remove();
-  
+
 
   // Clear out array on Map and Journal
   newAddArr = [];
@@ -274,11 +277,11 @@ $(document).ready(function () {
   $.get("/api/user_data").then(data => {
     $(".member-name").text(data.email);
     memberEmail = data.email;
-    console.log(memberEmail);
+    // console.log(memberEmail);
   });
 
   // Render user journal list
-  renderJournal();
+  // renderJournal();
 
   // Render map section
   if (userListArr.length === 0) {
@@ -292,7 +295,6 @@ $(document).ready(function () {
   // When user click to search a place
   $(document).on("click", "#searchBtn", handleSearchBtnSubmit);
 
-  console.log("after serachButton newAddArr.length = " + newAddArr.length);
 
   // When user click to finish a journal
   $(document).on("click", "#pushBtn", handlePushBtnSubmit);

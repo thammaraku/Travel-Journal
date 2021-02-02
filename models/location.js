@@ -61,7 +61,7 @@ module.exports = function(sequelize, DataTypes) {
   
     });
 
-    //Many to Many realationship between user and location
+    //Many to Many relationship between user and location
     location.associate = (models) => {
       location.belongsToMany(models.User, {
         through: "merge",
