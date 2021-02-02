@@ -63,20 +63,32 @@ module.exports = function(app) {
   // });
 
 
-  // Route to explore page
-  app.get("/explore", function(req, res) {
-    res.sendFile(path.join(__dirname, "../public/user-home.html"));
-  });
+  // // Route to explore page
+  // app.get("/explore", function(req, res) {
+  //   res.sendFile(path.join(__dirname, "../public/user-home.html"));
+  // });
   
-  //routes to primary dashboard user page
-  app.get("/my-journals", isAuthenticated, function(req, res) {
-    res.sendFile(path.join(__dirname, "../public/main-journal.html"));
-  });
+  // //routes to primary dashboard user page
+  // app.get("/my-journals", isAuthenticated, function(req, res) {
+  //   res.sendFile(path.join(__dirname, "../public/main-journal.html"));
+  // });
 
-  // Routes to add a new journal
-  app.get("/journal-entry", isAuthenticated, function(req, res) {
-    res.sendFile(path.join(__dirname, "../public/user_journal.html"));
-  });
+  // // Routes to add a new journal
+  // app.get("/journal-entry", isAuthenticated, function(req, res) {
+  //   res.sendFile(path.join(__dirname, "../public/user_journal.html"));
+  // });
+
+
+    // Route to explore page
+    app.get("/explore", function(req, res) {
+      res.sendFile(path.join(__dirname, "../public/explore.html"));
+    });
+    // Routes to user page
+    app.get("/home", function(req, res) {
+      // res.sendFile(path.join(__dirname, "../public/home.html"));
+      res.sendFile(path.join(__dirname, "../public/user_journal.html"));
+  
+    });
 
 };
 
