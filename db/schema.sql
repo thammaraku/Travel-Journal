@@ -1,1 +1,1 @@
-CREATE DATABASE traveljournal_db;
+CREATE DATABASE debugtraveljournal_db;
